@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TabunganControl</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+    <div class="profile">
+        <div class="avatar">L</div>
+
+        <div class="user-info">
+            <div class="name" id="user-name">Lybear</div>
+            <div class="rank">Bronze</div>
+            <!-- Level & EXP -->
+            <div class="level-box">
+                <div class="level-row">
+                    <span>Level</span>
+                    <strong id="user-level">1</strong>
+                </div>
+
+                <div class="exp-row">
+                    <div class="exp-bar-bg">
+                        <div class="exp-bar" id="exp-bar"></div>
+                    </div>
+                    <small id="exp-text">0%</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <button class="nav-item active">Dashboard</button>
+        <button class="nav-item">Transaksi</button>
+        <button class="nav-item">Riwayat</button>
+        <button class="nav-item">Pengaturan</button>
+    </nav>
+
+    <footer class="sidebar-footer">© AItemanku</footer>
+</aside>
+        <main class="main">
+            <header class="main-header">
+                <div>
+                    <h1>Selamat datang di TabunganControl</h1>
+                    <p>Atur keuanganmu dengan mudah dan cepat</p>
+                </div>
+                <div class="header-actions">
+                    <button id="set-target-btn" class="btn btn-secondary">ATUR TARGET</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <section class="card balance-card">
+                    <h2>Saldo saat ini</h2>
+                    <p id="balance-amount">Rp 0</p>
+                </section>
+
+                <section class="card savings-target-card">
+                    <h2>Target Tabungan</h2>
+                    <div class="target-info">
+                        <span id="savings-progress-text">Tersimpan: Rp 0</span>
+                        <span id="savings-target-text">Target: Rp 0</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="savings-progress-bar"></div>
+                    </div>
+                </section>
+
+                <section class="card add-transaction-card">
+                    <h2>Tambah Transaksi</h2>
+                    <form id="transaction-form">
+                        <input type="text" id="description" placeholder="Deskripsi (misal: Makan siang)" required />
+                        <input type="number" id="amount" placeholder="Jumlah (misal: 50000)" required />
+                        <div class="action-row">
+                            <div class="transaction-type">
+                                <label class="radio">
+                                    <input type="radio" name="type" value="income" checked />
+                                    <span>Pemasukan</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="type" value="expense" />
+                                    <span>Pengeluaran</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="card transaction-history-card">
+                    <h2>Riwayat Transaksi</h2>
+                    <ul id="transaction-list"></ul>
+                </section>
+
+                <section class="card weekly-report-card">
+                    <h2>Laporan Keuangan</h2>
+                    <div class="report-details">
+                        <div>
+                            <p>Total Pemasukan Minggu Ini</p>
+                            <span id="weekly-income">Rp 0</span>
+                        </div>
+                        <div>
+                            <p>Total Pengeluaran Minggu Ini</p>
+                            <span id="weekly-expense">Rp 0</span>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Target -->
+    <div id="target-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-btn" aria-label="Tutup">&times;</button>
+            <h2>Atur Target Tabungan</h2>
+            <form id="target-form">
+                <input type="number" id="target-amount" placeholder="Masukkan jumlah target" required />
+                <div style="display:flex;gap:10px;margin-top:12px;">
+                    <button type="submit" class="btn btn-primary">Simpan Target</button>
+                    <button type="button" class="btn btn-secondary close-modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

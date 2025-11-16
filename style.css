@@ -1,0 +1,469 @@
+/* ==========================
+   GLOBAL RESET & VARIABLES
+========================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sidebar-bg: #0f1629;
+  --primary: #4057ff;
+  --card-bg: #ffffff;
+  --muted: #6b6f87;
+  --accent: #4a6cff;
+}
+
+/* ==========================
+   BASE STYLE
+========================== */
+body {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: linear-gradient(180deg, #eef2ff 0%, #f8fbff 100%);
+  color: #10203a;
+  min-height: 100vh;
+}
+
+.app {
+  display:flex;
+  min-height:100vh;
+  align-items: stretch;
+}
+
+/* ==========================
+   SIDEBAR (UPDATED)
+========================== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 280px;
+  min-width: 280px;
+
+  background: var(--sidebar-bg);
+  color: #fff;
+  padding: 28px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow-y: auto; /* biar scroll kalau konten sidebar kepanjangan */
+}
+
+
+/* Profile + Level + EXP jadi satu blok */
+.profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.user-info .name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.user-info .rank {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+/* Level dan EXP menempel di bawah nama */
+.user-info .level-box {
+  margin-top: 4px;
+}
+
+.level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #cfd8ff;
+  margin-bottom: 6px;
+}
+
+.exp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exp-bar-bg {
+  flex: 1;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #0b203f;
+}
+
+.exp-bar {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, var(--accent), #2f44d6);
+}
+
+.exp-row small {
+  font-size: 12px;
+  color: #cbd6ff;
+}
+
+/* Nav tetap */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+
+.nav-item {
+  background: transparent;
+  border: none;
+  color: #cbd6ff;
+
+  padding: 10px 12px;
+  text-align: left;
+  border-radius: 8px;
+
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.sidebar-footer {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #93a0d8;
+}
+
+.main {
+  flex: 1;
+  padding: 28px 32px;
+  margin-left: 280px; /* SAMA dengan width sidebar */
+}
+
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.main-header h1 {
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: #0b2a66;
+}
+
+.main-header p {
+  color: var(--muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  border: 1px solid rgba(14, 44, 101, 0.04);
+  box-shadow: 0 8px 20px rgba(16, 32, 58, 0.06);
+}
+
+.card h2 {
+  color: #2540c9;
+  margin-bottom: 10px;
+}
+
+.balance-card p#balance-amount {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1230b3;
+}
+
+/* ==========================
+   SAVINGS TARGET
+========================== */
+.target-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  color: #556787;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #eef4ff;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  transition: width 0.4s ease;
+  background: linear-gradient(90deg, var(--primary), #2f44d6);
+}
+
+/* ==========================
+   FORM
+========================== */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #e6ecff;
+  background: #fbfdff;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(64, 87, 255, 0.08);
+}
+
+.add-transaction-card .action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.transaction-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transaction-type .radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px;
+  border-radius: 8px;
+  background: #f1f5ff;
+}
+
+.transaction-type input[type="radio"] {
+  display: none;
+}
+
+.transaction-type input[type="radio"] + span {
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  cursor: pointer;
+  font-weight: 700;
+  color: #2540c9;
+}
+
+.transaction-type input[type="radio"]:checked + span {
+  color: #fff;
+  background: linear-gradient(90deg, #4057ff, #2f44d6);
+}
+
+/* ==========================
+   TRANSACTION LIST
+========================== */
+#transaction-list {
+  list-style: none;
+  max-height: 280px;
+  overflow: auto;
+  padding-right: 8px;
+}
+
+#transaction-list li {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 10px 0;
+  font-weight: 600;
+  border-bottom: 1px solid #f1f5ff;
+}
+
+.transaction-desc {
+  color: #24335f;
+}
+
+.transaction-amount.income {
+  color: #059669;
+}
+
+.transaction-amount.expense {
+  color: #dc2626;
+}
+
+.delete-btn {
+  display: inline-block;
+  padding: 6px 8px;
+  border-radius: 8px;
+
+  border: 1px solid #ffd5d5;
+  background: #fff0f0;
+
+  color: #b91c1c;
+  cursor: pointer;
+}
+
+/* ==========================
+   WEEKLY REPORT
+========================== */
+.report-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.report-details div {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+  background: #fbfdff;
+}
+
+/* ==========================
+   MODAL
+========================== */
+.modal {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(2, 6, 23, 0.5);
+  backdrop-filter: blur(4px);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.modal .modal-content {
+  width: 94%;
+  max-width: 420px;
+  padding: 18px;
+
+  background: #fff;
+  border-radius: 12px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+
+  background: transparent;
+  border: none;
+
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-primary {
+  color: #fff;
+  background: var(--primary);
+}
+
+.btn-secondary {
+  color: #2540c9;
+  background: #f1f4ff;
+  border: 1px solid rgba(37, 64, 201, 0.06);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 12px;
+    padding: 12px 14px;
+    overflow: auto;
+  }
+
+  .main {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+  }
+
+  .cards {
+    gap: 12px;
+  }
+}
